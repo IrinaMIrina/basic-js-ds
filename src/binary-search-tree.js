@@ -11,16 +11,17 @@ class Node {
     this.value = value;
     this.left = null;
     this.right = null;
+    this.rootNode = null;
   }
 }
 class BinarySearchTree {
 
   root() {
-    this.root = null;
+    return this.rootNode;
   }
 
   add(value) {
-    this.root = addWithin(this.root,value);
+    this.rootNode = addWithin(this.rootNode,value);
     function addWithin(node,value){
       if(!node){
         return new Node(value);
@@ -38,7 +39,7 @@ class BinarySearchTree {
   }
 
   has(value) {
-    return searchWithin(this.root,value);
+    return searchWithin(this.rootNode,value);
 
     function searchWithin(node, value){
       if(!node){
@@ -59,7 +60,7 @@ class BinarySearchTree {
   }
 
   remove(value) {
-    this.root = removeNode(this.root, value);
+    this.rootNode = removeNode(this.rootNode, value);
 
     function removeNode(node, value){
       if(!node) {
@@ -95,10 +96,10 @@ class BinarySearchTree {
   }
 
   min() {
-    if(!this.root){
+    if(!this.rootNode){
       return;
     }
-    let node = this.root;
+    let node = this.rootNode;
     while(node.left){
       node = node.left;
     }
@@ -106,11 +107,14 @@ class BinarySearchTree {
   }
 
   max() {
-    let current = this.root;
-    while(current.right !==null) {
-      current = current.right;
+    if(!this.rootNode){
+      return;
     }
-    return currrent.value;
+    let maxRootNode = this.rootNode;
+    while(maxRootNode.right !==null) {
+      maxRootNode = maxRootNode.right;
+    }
+    return maxRootNode.value;
   }
 }
 
